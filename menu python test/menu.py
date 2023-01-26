@@ -3,9 +3,13 @@ import os
 import webbrowser
 import subprocess
 import pathlib
+import playsound
+from gtts import gTTS
+
 
 #import music21
 
+# coding: utf-8
 
 
 class MyApp:
@@ -69,7 +73,7 @@ class MyApp:
 
     def create_button3(self):
         yt_button3 = Button(self.frame, text="Oral Instructions", font=("Courrier", 25), bg='white', fg='#41B77F',
-                       command=self.open_channel3)
+                       command=self.vocal)
         yt_button3.pack(pady=45, fill=X)
 
 
@@ -100,6 +104,16 @@ class MyApp:
         liste.insert(6, "music 6")
 
         liste.pack()
+
+    def vocal(self):
+
+        mytext = 'select a music sheet'
+        #textSpeech = gTTS(text=mytext, lang='fr', slow=False)
+        #textSpeech.save(mytext + ".mp3")
+        playsound.playsound('./vocal/' + mytext + '.mp3')
+
+
+
         
         
 
