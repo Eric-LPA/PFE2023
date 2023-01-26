@@ -14,6 +14,8 @@ from gtts import gTTS
 
 class MyApp:
 
+   
+
     def __init__(self):
         self.window = Tk()
         self.window.title("My Application")
@@ -21,13 +23,15 @@ class MyApp:
         self.window.minsize(720, 480)
         path = os.path.abspath(os.getcwd())
         test =os.path.join(path, "bg.jpg")
+        
+        
         #bg = PhotoImage(file = test)
 
         
-        self.window.config(background='#41B77F')
+        self.window.config(background='#2962ff')
 
         # initialization des composants
-        self.frame = Frame(self.window, bg='#41B77F')
+        self.frame = Frame(self.window, bg='#2962ff')
 
         # creation des composants
         self.create_widgets()
@@ -35,26 +39,35 @@ class MyApp:
         # empaquetage
         self.frame.pack(expand=YES)
 
+        
+        def key_press(e):
+            self.return_choix()
+
+        self.window.bind('<Tab>',key_press)
+
+
     def create_widgets(self):
         self.create_title()
         self.create_subtitle()
         self.create_button()
         self.create_button3()
         self.create_button2()
+        self.vocal_intro()
+
         
 
     def create_title(self):
-        label_title = Label(self.frame, text="Music for Everyone", font=("Courrier", 40), bg='#41B77F',
+        label_title = Label(self.frame, text="Music for Everyone", font=("Courrier", 40), bg='#2962ff',
                             fg='white')
         label_title.pack()
 
     def create_subtitle(self):
-        label_subtitle = Label(self.frame, text="Naviguate with Tabulations", font=("Courrier", 25), bg='#41B77F',
+        label_subtitle = Label(self.frame, text="Naviguate with Tabulations", font=("Courrier", 25), bg='#2962ff',
                                fg='white')
         label_subtitle.pack()
 
     def create_button(self):
-        yt_button = Button(self.frame, text="start the application", font=("Courrier", 25), bg='white', fg='#41B77F',
+        yt_button = Button(self.frame, text="start the application", font=("Courrier", 25), bg='white', fg='#2962ff',
                            command=self.open_channel)
         yt_button.pack(pady=25, fill=X)
 
@@ -62,9 +75,13 @@ class MyApp:
 
     def open_channel(self):
         #webbrowser.open_new("http://youtube.com")
-        music_1 = r'"C:\Program Files (x86)\MuseScore 3\bin\MuseScore3.exe" "C:\Users\EN_Le\OneDrive\Bureau\PFE\menu python test\Passacaglia.mscz"'
+       
+        text2 = os.getcwd() + "\Passacaglia.mscz"
         
+        print(text2)
+        music_1 = r'"C:\Program Files (x86)\MuseScore 3\bin\MuseScore3.exe" ' +'"'+ text2 +'"' 
         
+        print(music_1)
         os.popen(music_1)
         #subprocess.call([r"C:\Program Files (x86)\MuseScore 3\bin\MuseScore3.exe 'C:\Users\EN_Le\OneDrive\Bureau\PFE\menu python test\Passacaglia.mscz'"])
         #c = music21.converter.parse('path_to_musicxml.xml')
@@ -72,7 +89,7 @@ class MyApp:
         #c.show('midi')
 
     def create_button3(self):
-        yt_button3 = Button(self.frame, text="Oral Instructions", font=("Courrier", 25), bg='white', fg='#41B77F',
+        yt_button3 = Button(self.frame, text="Oral Instructions", font=("Courrier", 25), bg='white', fg='#2962ff',
                        command=self.vocal)
         yt_button3.pack(pady=45, fill=X)
 
@@ -80,7 +97,7 @@ class MyApp:
 
 
     def open_channel3(self):
-        music_1 = r'"C:\Program Files (x86)\MuseScore 3\bin\MuseScore3.exe" "C:\Users\EN_Le\OneDrive\Bureau\PFE\menu python test\Passacaglia.mscz"'
+        music_1 = r'"C:\Program Files (x86)\MuseScore 3\bin\MuseScore3.exe" "C:\Users\elyes\Documents\GitHub\PFE2023\menu python test\Passacaglia.mscz"'
         
         
         os.popen(music_1)
@@ -88,7 +105,7 @@ class MyApp:
 
 
     def create_button2(self):
-        yt_button2 = Button(self.frame, text="select a music sheet", font=("Courrier", 25), bg='white', fg='#41B77F',
+        yt_button2 = Button(self.frame, text="select a music sheet", font=("Courrier", 25), bg='white', fg='#2962ff',
                            command=self.open_channel2)
         yt_button2.pack(pady=45, fill=X)
 
@@ -107,10 +124,31 @@ class MyApp:
 
     def vocal(self):
 
-        mytext = 'select a music sheet'
-        #textSpeech = gTTS(text=mytext, lang='fr', slow=False)
-        #textSpeech.save(mytext + ".mp3")
+        mytext = 'Instruction'
+        textSpeech = gTTS(text=mytext, lang='fr', slow=False)
+        textSpeech.save("instruction" + ".mp3")
         playsound.playsound('./vocal/' + mytext + '.mp3')
+
+    def vocal_intro(self):
+        playsound.playsound('./vocal/intro.mp3')
+    
+    def vocal_choix1(self):
+        playsound.playsound('./vocal/instruction.mp3')
+    
+    def vocal_choix2(self):
+        playsound.playsound('./vocal/select a music sheet.mp3')
+
+    choix = True
+    def return_choix(self):
+        global choix
+        if choix:
+            self.vocal_choix1()
+            choix = False
+        else:
+            self.vocal_choix2()
+            choix = True
+    
+
 
 
 
