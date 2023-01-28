@@ -14,8 +14,6 @@ from gtts import gTTS
 
 class MyApp:
 
-   
-
     def __init__(self):
         self.window = Tk()
         self.window.title("My Application")
@@ -23,6 +21,7 @@ class MyApp:
         self.window.minsize(720, 480)
         path = os.path.abspath(os.getcwd())
         test =os.path.join(path, "bg.jpg")
+        self.choix = True 
         
         
         #bg = PhotoImage(file = test)
@@ -138,36 +137,23 @@ class MyApp:
     def vocal_choix2(self):
         playsound.playsound('./vocal/select a music sheet.mp3')
 
-    choix = True
-    def return_choix(self):
-        global choix
-        if choix:
-            self.vocal_choix1()
-            choix = False
-        else:
-            self.vocal_choix2()
-            choix = True
     
-
-
-
-
-        
-        
-
+    def return_choix(self):
+        print("avant if")
+        print(self.choix)
+        if self.choix:
+            self.choix = False
+            self.vocal_choix1()
+            print("if")
+            print(self.choix)
             
-
-
-
-
-
-
-        
-        
-
-
-
-
+        else:
+            self.choix = True
+            self.vocal_choix2()
+            print("else")
+            print(self.choix)
+            
+    
 # afficher
 app = MyApp()
 app.window.mainloop()
