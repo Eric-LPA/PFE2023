@@ -18,7 +18,7 @@ class MyApp:
         self.window.minsize(720, 480)
         path = os.path.abspath(os.getcwd())
         test =os.path.join(path, "bg.jpg")
-        self.choix = False
+        self.choix = True
 
         #self.vocal()
 
@@ -91,7 +91,7 @@ class MyApp:
         os.popen(music_1)
 
     def create_button3(self):
-        yt_button3 = Button(self.frame, text="Oral Instructions", font=("Courrier", 25), bg='white', fg='#2962ff',
+        yt_button3 = Button(self.frame, text="Instructions", font=("Courrier", 25), bg='white', fg='#2962ff',
                        command=self.vocal_instruction)
         yt_button3.pack(pady=45, fill=X)
 
@@ -109,18 +109,18 @@ class MyApp:
 
         self.listbox = Listbox(self.window)
         self.listbox.insert(1, "Passacaglia")
-        self.listbox.insert(2, "5 Centimetres par Seconde")
+        self.listbox.insert(2, "4 Christmas Carols")
         self.listbox.insert(3, "Rachmaninoff Numero 2")
         self.listbox.insert(4, "Duvernoy Etude")
 
         self.listbox.pack(side=BOTTOM, pady=10)
-        self.listbox.configure(width=60, background='#A9A9A9', foreground="white", font=('Times 13'), selectbackground='#DCDC14')
+        self.listbox.configure(width=60, background='white', foreground="black", font=('Times 13'), selectbackground='#2962ff',justify='center')
 
     def vocal(self):
         #mytext = " Voici les Instructions pour naviguer dans notre application Blindar. Utiliser la touche tabulation pour naviguer entre les différents boutons. Une fois sur l'option musique, utiliser les fleches haut et bas pour selectionner la partition voulu. Vous pouvez maintenant lancer l'application. Appuyez sur la touche 'J'. vous pouvez maintenant ecouter chaque note en parcourant la partition avec les fléches gauche et droite. Ou bien appuyer sur espace pour démarrer la musique. Il est aussi possible de passer d'une mesure à l'autre en appuyant sur la touche control plus les flèches de directions. Enfin pour fermer l'application, veuillez appuyer sur la touche F, il sera possible de choisir une nouvelle partition."
-        mytext = "Duvernoy Etude"
+        mytext = "4 Christmas Carols"
         textSpeech = gTTS(text=mytext, lang='fr', slow=False)
-        textSpeech.save("Duvernoy Etude" + ".mp3")
+        textSpeech.save("4 Christmas Carols" + ".mp3")
         #playsound.playsound('./vocal/' + mytext + '.mp3')
 
     def vocal_intro(self):
