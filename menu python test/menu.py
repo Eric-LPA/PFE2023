@@ -125,8 +125,8 @@ class MyApp:
 
         mytext = 'Instruction'
         textSpeech = gTTS(text=mytext, lang='fr', slow=False)
-        textSpeech.save("instruction" + ".mp3")
-        playsound.playsound('./vocal/' + mytext + '.mp3')
+        #textSpeech.save("instruction" + ".mp3")
+       # playsound.playsound('./vocal/' + mytext + '.mp3')
 
     def vocal_intro(self):
         playsound.playsound('./vocal/intro.mp3')
